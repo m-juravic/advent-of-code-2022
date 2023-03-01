@@ -33,21 +33,30 @@ async function readFile(file) {
 async function calcScore(rounds) {
 
   let roundResults = await readFile(rounds);
-
+  // console.log("roundResults", roundResults);
 
   let score = 0;
 
   for(let round of roundResults) {
-    if(round === "AX" || round === "BY" || round === "CZ") {
+    if(round === "A X" || round === "B Y" || round === "C Z") {
+      // console.log("score of 6");
+      score += 3;
+    } if (round === "A Y" || round === "B Z" || round === "C X") {
+      // console.log("score of 8");
       score += 6;
-    } else if (round === "AY" || round === "BZ" || round === "CX") {
-      score += 8;
-    } else if (round === "AZ" || round === "BX" || round === "CY") {
+    } if (round === "A Z" || round === "B X" || round === "C Y") {
+      // console.log("score of 1");
+      score += 0;
+    } if (round[2] === "X") {
       score += 1;
+    } if (round[2] === "Y") {
+      score += 2;
+    } if (round[2] === "Z") {
+      score += 3;
     }
   }
 
-  //14306 is too low and not correct answer
+  //answer 14531
   console.log("score", score);
   return score;
 }
